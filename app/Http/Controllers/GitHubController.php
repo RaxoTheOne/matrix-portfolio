@@ -75,4 +75,41 @@ class GitHubController extends Controller
 
         return response()->json($data);
     }
+    public function repos(Request $request)
+{
+    $username = $request->query('username') ?: config('app.github_username', env('GITHUB_USERNAME'));
+    if (! $username) {
+        return response()->json(['error' => 'GITHUB_USERNAME not configured'], 400);
+    }
+    $token   = env('GITHUB_TOKEN');
+    $headers = [
+        'Accept'               => 'application/vnd.github+json',
+        'X-GitHub-Api-Version' => '2022-11-28',
+    ];
+    if ($token) {
+        $headers['Authorization'] = 'Bearer ' . $token;
+    }
+
+    $res = Http::withHeaders($headers)
+        ->get("https://api.github.com/users/{$username}/repos", ['per_page' => 100]);
+
+    if ($res->failed()) {
+        return response()->json(['error' => 'github_repos_failed'], 502);
+    }
+
+    $repos = collect($res->json())
+        ->sortByDesc('stargazers_count')
+        ->take(6)
+        ->map(fn($r) => [
+            'name'             => $r['name'] ?? '',
+            'html_url'         => $r['html_url'] ?? '',
+            'description'      => $r['description'] ?? '',
+            'language'         => $r['language'] ?? null,
+            'stargazers_count' => $r['stargazers_count'] ?? 0,
+        ])
+        ->values();
+
+    return response()->json($repos);
+}
+
 }
