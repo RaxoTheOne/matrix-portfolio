@@ -1,41 +1,62 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="py-16 lg:py-24">
-        <div class="max-w-3xl">
-            <h1 class="text-4xl lg:text-6xl font-medium mb-4">Ich baue moderne, performante Web-Erlebnisse.</h1>
-            <p class="text-[#706f6c] dark:text-[#A1A09A] text-lg leading-normal mb-8">
-                Saubere Architektur, gutes UX und ein Auge fürs Detail – inspiriert vom Look der Referenzseite
-                (<a href="https://coder-journey-3.preview.emergentagent.com/" class="underline underline-offset-4 text-[#f53003] dark:text-[#FF4433]" target="_blank">Link</a>).
-            </p>
-            <div class="flex gap-3">
-                <a href="#work" class="inline-block px-5 py-2 bg-[#1b1b18] text-white rounded-sm border border-black hover:bg-black hover:border-black">Projekte ansehen</a>
-                <a href="#contact" class="inline-block px-5 py-2 border border-[#19140035] hover:border-[#1915014a] rounded-sm">Kontakt</a>
+    <section class="py-10 lg:py-14">
+        <div class="flex items-start gap-6">
+            <img src="https://avatars.githubusercontent.com/u/11487003?v=4" alt="Avatar" class="w-16 h-16 rounded-full border border-[#00ff7f66]"/>
+            <div>
+                <h1 class="text-3xl lg:text-4xl mb-1">
+                    <span class="text-[#7ee7b5]">Benjamin Gayda-Knopl</span>
+                    <span class="opacity-70">— RaxoTheOne</span>
+                </h1>
+                <p class="text-[#7ee7b5] text-sm">31 Jahre alt, Vater von drei Mädchen, glücklich verheiratet, angehender Fachinformatiker für Anwendungsentwicklung</p>
+                <div class="mt-3 text-xs opacity-80 flex items-center gap-4">
+                    <span>⭐ 2 stars</span>
+                    <span>🍴 0 forks</span>
+                    <span>&lt;/&gt; 73 Repos</span>
+                </div>
+                <a href="#projects" class="inline-block mt-4 px-4 py-1 bg-[#00ff7f] text-black rounded-sm border border-[#00ff7f] hover:bg-[#7ee7b5] transition">View My Work</a>
             </div>
         </div>
     </section>
 
-    <section id="work" class="py-12 border-t border-[#19140035] dark:border-[#3E3E3A]">
-        <h2 class="text-2xl font-medium mb-6">Ausgewählte Arbeiten</h2>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            @foreach (range(1,3) as $i)
-                <article class="rounded-sm shadow-[0px_0px_1px_0px_rgba(0,0,0,0.03),0px_1px_2px_0px_rgba(0,0,0,0.06)] p-6 bg-white dark:bg-[#161615]">
-                    <div class="aspect-[335/200] bg-[#dbdbd7] dark:bg-[#3E3E3A] rounded-sm mb-4"></div>
-                    <h3 class="font-medium mb-1">Projekt {{ $i }}</h3>
-                    <p class="text-sm text-[#706f6c] dark:text-[#A1A09A]">Kurze Beschreibung des Projekts mit Fokus auf Ergebnisse.</p>
-                </article>
-            @endforeach
+    <section class="py-6">
+        <div class="flex text-xs border border-[#00ff7f33] rounded-sm overflow-hidden">
+            <button class="tab-btn flex-1 px-4 py-2 bg-[#072d1d]" data-tab="about">About</button>
+            <button class="tab-btn flex-1 px-4 py-2 border-l border-[#00ff7f33]" data-tab="projects">Projects</button>
+            <button class="tab-btn flex-1 px-4 py-2 border-l border-[#00ff7f33]" data-tab="skills">Skills</button>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4">
+            <div class="tab-panel border border-[#00ff7f33] rounded-sm p-4 bg-black/40" id="about">
+                <h3 class="text-sm mb-2 opacity-90">About Me</h3>
+                <p class="text-[#7ee7b5] text-sm leading-normal opacity-90">
+                    Ich liebe es, an verschiedenen Projekten zu arbeiten und neue Technologien zu lernen.
+                    Mein Ziel ist es, als Full‑Stack‑Entwickler zu arbeiten und innovative Lösungen zu entwickeln.
+                </p>
+            </div>
+            <div class="tab-panel hidden border border-[#00ff7f33] rounded-sm p-4 bg-black/40" id="projects">
+                <h3 class="text-sm mb-2 opacity-90">GitHub Stats</h3>
+                <ul class="text-xs space-y-1 opacity-80">
+                    <li>Total Stars: 2</li>
+                    <li>Total Forks: 0</li>
+                    <li>Languages: 8</li>
+                    <li>Account Age: 729 days</li>
+                    <li>Most Used: Python</li>
+                </ul>
+            </div>
+            <div class="tab-panel hidden border border-[#00ff7f33] rounded-sm p-4 bg-black/40" id="skills">
+                <h3 class="text-sm mb-2 opacity-90">Contact Info</h3>
+                <ul class="text-xs space-y-1 opacity-80">
+                    <li>GitHub: RaxoTheOne</li>
+                    <li>E-Mail: traxon.bgg@gmail.com</li>
+                    <li>Ort: Berlin</li>
+                </ul>
+            </div>
         </div>
     </section>
 
-    <section id="about" class="py-12">
-        <h2 class="text-2xl font-medium mb-4">Über mich</h2>
-        <p class="text-[#706f6c] dark:text-[#A1A09A] max-w-2xl">Ich kombiniere Laravel im Backend mit modernen Frontend-Stacks, um hochwertige Produkte zu liefern.</p>
-    </section>
-
-    <section id="contact" class="py-12 border-t border-[#19140035] dark:border-[#3E3E3A]">
-        <h2 class="text-2xl font-medium mb-4">Kontakt</h2>
-        <p class="text-[#706f6c] dark:text-[#A1A09A]">Schreib mir: <a href="mailto:hi@example.com" class="underline">hi@example.com</a></p>
+    <section id="contact" class="py-10">
+        <p class="text-xs opacity-70">© {{ date('Y') }} Benjamin Gayda-Knopl — Portfolio mit Matrix‑Effekt</p>
     </section>
 @endsection
 

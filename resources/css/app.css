@@ -9,3 +9,28 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+/* Matrix theme helpers */
+.font-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace }
+.fixed { position: fixed }
+.inset-0 { top:0; right:0; bottom:0; left:0 }
+.-z-10 { z-index: -10 }
+.bg-black\/75 { background-color: rgba(0,0,0,.75) }
+.text-\[\#00ff7f\] { color: #00ff7f }
+.border-\[\#00ff7f66\] { border-color: #00ff7f66 }
+.bg-\[\#072d1d\] { background-color: #072d1d }
+.hover\:underline:hover { text-decoration: underline }
+.underline-offset-4 { text-underline-offset: 4px }
+.tracking-wide { letter-spacing: .03em }
+.opacity-70 { opacity: .7 }
+.opacity-80 { opacity: .8 }
+.opacity-90 { opacity: .9 }
+.rounded-sm { border-radius: .25rem }
+.border { border-width: 1px }
+.border-\[\#00ff7f33\] { border-color: #00ff7f33 }
+.bg-black\/40 { background-color: rgba(0,0,0,.4) }
+.transition { transition: all .15s ease }
+.hover\:bg-\[\#00ff7f\]:hover { background-color: #00ff7f }
+.hover\:text-black:hover { color: #000 }
+.hover\:bg-\[\#7ee7b5\]:hover { background-color: #7ee7b5 }
+.text-\[\#7ee7b5\] { color: #7ee7b5 }
