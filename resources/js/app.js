@@ -54,7 +54,8 @@ document.addEventListener('click', (e) => {
 // Fetch GitHub stats and update placeholders
 async function fetchGitHubStats() {
     try {
-        const res = await fetch('/github/stats');
+        const username = document.querySelector('[data-username]')?.getAttribute('data-username') || 'RaxoTheOne';
+        const res = await fetch(`/github/stats?username=${encodeURIComponent(username)}`);
         if (!res.ok) return;
         const data = await res.json();
         document.querySelectorAll('[data-stat]')?.forEach(el => {
