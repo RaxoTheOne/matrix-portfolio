@@ -10,7 +10,7 @@ class GitHubController extends Controller
 {
     public function stats(Request $request)
     {
-        $username = config('app.github_username', env('GITHUB_USERNAME'));
+        $username = $request->query('username') ?: config('app.github_username', env('GITHUB_USERNAME'));
         if (!$username) {
             return response()->json([
                 'error' => 'GITHUB_USERNAME not configured'], 400);
@@ -19,7 +19,12 @@ class GitHubController extends Controller
         $token = env('GITHUB_TOKEN');
         $cacheKey = "gh:stats:{$username}";
 
-        $data = Cache::remember($cacheKey, now()->addMinutes(30), function () use ($username, $token) {
+        $cached = Cache::get($cacheKey);
+        if ($cached) {
+            return response()->json($cached);
+        }
+
+        $data = (function () use ($username, $token) {
             $headers = [
                 'Accept' => 'application/vnd.github+json',
                 'X-GitHub-Api-Version' => '2022-11-28',
@@ -62,7 +67,11 @@ class GitHubController extends Controller
                 'languages_count' => count($languages),
                 'top_language' => $topLanguage,
             ];
-        });
+        })();
+
+        if (!isset($data['error'])) {
+            Cache::put($cacheKey, $data, now()->addMinutes(30));
+        }
 
         return response()->json($data);
     }
