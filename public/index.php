@@ -1,5 +1,11 @@
 <?php
 
+// Suppress PHP notices/warnings/deprecations from being displayed in the browser
+// while actively programming. Errors will still be logged according to the
+// application's logging configuration.
+// Display errors should be configured via environment (.env) or php.ini, not hardcoded here.
+ini_set('display_errors', '1'); // Show all errors during development
+
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 
