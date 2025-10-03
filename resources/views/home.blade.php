@@ -34,8 +34,6 @@
                     Ich liebe es, an verschiedenen Projekten zu arbeiten und neue Technologien zu lernen.
                     Mein Ziel ist es, als Full‑Stack‑Entwickler zu arbeiten und innovative Lösungen zu entwickeln.
                 </p>
-            </div>
-            <div class="tab-panel hidden border border-[#00ff7f33] rounded-sm p-4 bg-black/40" id="projects">
                 <h3 class="text-sm mb-2 opacity-90">GitHub Stats</h3>
                 <ul class="text-xs space-y-1 opacity-80">
                     <li>Total Stars: <span data-stat="total_stars">—</span></li>
@@ -44,6 +42,11 @@
                     <li>Languages: <span data-stat="languages_count">—</span></li>
                     <li>Most Used: <span data-stat="top_language">—</span></li>
                 </ul>
+            </div>
+            <div class="tab-panel hidden border border-[#00ff7f33] rounded-sm p-4 bg-black/40" id="projects">
+                <div id="repo-list" class="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-2">
+                <!-- wird per JS gefüllt -->
+                </div>
             </div>
             <div class="tab-panel hidden border border-[#00ff7f33] rounded-sm p-4 bg-black/40" id="skills">
             </div>
