@@ -6,7 +6,7 @@
             <img src="https://avatars.githubusercontent.com/u/11487003?v=4" alt="Avatar" class="w-16 h-16 rounded-full border border-[#00ff7f66]"/>
             <div>
                 <h1 class="text-3xl lg:text-4xl mb-1">
-                    <span class="text-[#7ee7b5]">Benjamin Gayda-Knopl</span>
+                    <span class="text-[#7ee7b5]">Benjamin Gayda-Knop</span>
                     <span class="opacity-70">— RaxoTheOne</span>
                 </h1>
                 <p class="text-[#7ee7b5] text-sm">31 Jahre alt, Vater von drei Mädchen, glücklich verheiratet, angehender Fachinformatiker für Anwendungsentwicklung</p>
@@ -50,9 +50,9 @@
             <div class="tab-panel hidden border border-[#00ff7f33] rounded-sm p-4 bg-black/40" id="contact">
                 <h3 class="text-sm mb-2 opacity-90">Contact Info</h3>
                 <ul class="text-xs space-y-1 opacity-80">
-                    <li> GitHub: RaxoTheOne</li>
-                    <li>E-Mail: traxon.bg@gmail.com</li>
-                    <li>🚩Ort: Berlin</li>
+                    <li>💻 GitHub: RaxoTheOne</li>
+                    <li>📧 E-Mail: traxon.bg@gmail.com</li>
+                    <li>🌍 Ort: Berlin</li>
                 </ul>
             </div>
         </div>
