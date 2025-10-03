@@ -15,6 +15,7 @@
             <nav class="hidden lg:flex items-center gap-6 text-sm">
                 <a href="#about" class="hover:underline underline-offset-4">About</a>
                 <a href="#projects" class="hover:underline underline-offset-4">Projects</a>
+                <a href="#skills" class="hover:underline underline-offset-4">Skills</a>
                 <a href="#contact" class="hover:underline underline-offset-4">Contact</a>
                 <a href="https://github.com/" target="_blank" class="px-3 py-1 border border-[#00ff7f66] rounded-sm hover:bg-[#00ff7f] hover:text-black transition">GitHub</a>
             </nav>

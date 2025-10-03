@@ -50,3 +50,21 @@ document.addEventListener('click', (e) => {
     const panel = document.getElementById(id);
     if (panel) panel.classList.remove('hidden');
 });
+
+// Fetch GitHub stats and update placeholders
+async function fetchGitHubStats() {
+    try {
+        const res = await fetch('/github/stats');
+        if (!res.ok) return;
+        const data = await res.json();
+        document.querySelectorAll('[data-stat]')?.forEach(el => {
+            const key = el.getAttribute('data-stat');
+            if (data[key] !== undefined && data[key] !== null) {
+                el.textContent = data[key];
+            }
+        });
+    } catch (e) {
+        // ignore silently
+    }
+}
+window.addEventListener('load', fetchGitHubStats);
