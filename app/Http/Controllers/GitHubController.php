@@ -67,5 +67,3 @@ class GitHubController extends Controller
         return response()->json($data);
     }
 }
-
-
