@@ -69,3 +69,35 @@ async function fetchGitHubStats() {
     }
 }
 window.addEventListener('load', fetchGitHubStats);
+
+async function fetchRepos() {
+    try {
+        const username =
+            document
+                .querySelector("[data-username]")
+                ?.getAttribute("data-username") || "RaxoTheOne";
+        const res = await fetch(
+            `/github/repos?username=${encodeURIComponent(username)}`
+        );
+        if (!res.ok) return;
+        const repos = await res.json();
+        const mount = document.getElementById("repo-list");
+        if (!mount) return;
+        mount.innerHTML = repos
+            .map(
+                (r) => `
+      <a href="${r.html_url}" target="_blank"
+         class="block border border-[#00ff7f33] rounded-sm p-3 bg-black/40 hover:bg-[#072d1d] transition">
+        <div class="flex items-center justify-between">
+          <h4 class="text-sm">${r.name}</h4>
+          <span class="text-xs opacity-80">⭐ ${r.stargazers_count}</span>
+        </div>
+        <p class="text-xs opacity-80 mt-1">${r.description ?? ""}</p>
+        <p class="text-[10px] opacity-60 mt-1">${r.language ?? ""}</p>
+      </a>
+    `
+            )
+            .join("");
+    } catch (e) {}
+}
+window.addEventListener("load", fetchRepos);
