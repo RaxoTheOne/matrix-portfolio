@@ -59,6 +59,6 @@
     </section>
 
     <section id="contact" class="py-10">
-        <p class="text-xs opacity-70">© {{ date('Y') }} Benjamin Gayda-Knopl — Portfolio mit Matrix‑Effekt</p>
+        <p class="text-xs opacity-70">© {{ date('Y') }} Benjamin Gayda-Knop — Portfolio mit Matrix‑Effekt</p>
     </section>
 @endsection
