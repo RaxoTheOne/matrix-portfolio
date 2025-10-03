@@ -1,3 +1,46 @@
+# Laravel / PHP
+vendor/
+node_modules/
+
+# Environment
+.env
+.env.*
+
+# Storage and cache
+storage/*.key
+storage/app/public
+storage/logs/*.log
+bootstrap/cache/*.php
+bootstrap/cache/*.phpunit
+
+# Public build artifacts
+public/hot
+public/storage
+public/build
+public/mix-manifest.json
+
+# IDE / tooling
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# PHPUnit / tooling caches
+.phpunit.result.cache
+.phpunit.cache
+.php-cs-fixer.cache
+
+# Logs
+*.log
+
+# Database (local SQLite)
+database/*.sqlite
+
+# Package manager debug logs
+npm-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
 *.log
 .DS_Store
 .env
