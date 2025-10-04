@@ -33,22 +33,28 @@ class GitHubController extends Controller
             $headers = [
                 'Accept' => 'application/vnd.github+json',
                 'X-GitHub-Api-Version' => '2022-11-28',
+                'User-Agent' => 'matrix-portfolio-app',
             ];
             if ($token) {
                 $headers['Authorization'] = 'Bearer ' . $token;
             }
 
-            $userRes = Http::withHeaders($headers)
-                ->get("https://api.github.com/users/{$username}");
+            $client = Http::withHeaders($headers)->withOptions([
+                'verify' => true,
+                // Zeitlimits verhindern Hänger
+                'timeout' => 10,
+                'connect_timeout' => 5,
+            ]);
+
+            $userRes = $client->get("https://api.github.com/users/{$username}");
             if ($userRes->failed()) {
-                return [ 'error' => 'github_users_failed' ];
+                return [ 'error' => 'github_users_failed', 'status' => $userRes->status(), 'body' => $userRes->json() ];
             }
             $user = $userRes->json();
 
-            $reposRes = Http::withHeaders($headers)
-                ->get("https://api.github.com/users/{$username}/repos", [ 'per_page' => 100 ]);
+            $reposRes = $client->get("https://api.github.com/users/{$username}/repos", [ 'per_page' => 100 ]);
             if ($reposRes->failed()) {
-                return [ 'error' => 'github_repos_failed' ];
+                return [ 'error' => 'github_repos_failed', 'status' => $reposRes->status(), 'body' => $reposRes->json() ];
             }
             $repos = $reposRes->json();
 
@@ -92,16 +98,22 @@ class GitHubController extends Controller
     $headers = [
         'Accept'               => 'application/vnd.github+json',
         'X-GitHub-Api-Version' => '2022-11-28',
+        'User-Agent'           => 'matrix-portfolio-app',
     ];
     if ($token) {
         $headers['Authorization'] = 'Bearer ' . $token;
     }
 
-    $res = Http::withHeaders($headers)
-        ->get("https://api.github.com/users/{$username}/repos", ['per_page' => 100]);
+    $client = Http::withHeaders($headers)->withOptions([
+        'verify' => true,
+        'timeout' => 10,
+        'connect_timeout' => 5,
+    ]);
+
+    $res = $client->get("https://api.github.com/users/{$username}/repos", ['per_page' => 100]);
 
     if ($res->failed()) {
-        return response()->json(['error' => 'github_repos_failed'], 502);
+        return response()->json(['error' => 'github_repos_failed', 'status' => $res->status(), 'body' => $res->json()], 502);
     }
 
     $repos = collect($res->json())
