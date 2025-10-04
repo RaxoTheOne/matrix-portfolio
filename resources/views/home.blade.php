@@ -44,7 +44,7 @@
                 </ul>
             </div>
             <div class="tab-panel hidden border border-[#00ff7f33] rounded-sm p-4 bg-black/40" id="projects">
-                <div id="repo-list" class="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-2">
+                <div id="repo-list" class="grid grid-cols-1 lg:grid-cols-3 gap-3 mt-2">
                 <!-- wird per JS gefüllt -->
                 </div>
             </div>
