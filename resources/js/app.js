@@ -107,7 +107,7 @@ async function fetchRepos() {
                 .querySelector("[data-username]")
                 ?.getAttribute("data-username") || "RaxoTheOne";
         const res = await fetch(
-            `/github/repos?username=${encodeURIComponent(username)}`
+            `/github/repos?username=${encodeURIComponent(username)}&limit=12`
         );
         if (!res.ok) return;
         const repos = await res.json();
