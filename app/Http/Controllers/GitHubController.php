@@ -11,6 +11,7 @@ class GitHubController extends Controller
     public function stats(Request $request)
     {
         $username = $request->query('username') ?: config('app.github_username', env('GITHUB_USERNAME'));
+        $refresh  = $request->boolean('refresh');
         if (!$username) {
             return response()->json([
                 'error' => 'GITHUB_USERNAME not configured'], 400);
@@ -19,8 +20,12 @@ class GitHubController extends Controller
         $token = env('GITHUB_TOKEN');
         $cacheKey = "gh:stats:{$username}";
 
+        if ($refresh) {
+            Cache::forget($cacheKey);
+        }
+
         $cached = Cache::get($cacheKey);
-        if ($cached) {
+        if ($cached && ! $refresh) {
             return response()->json($cached);
         }
 
@@ -66,6 +71,8 @@ class GitHubController extends Controller
                 'total_forks' => array_sum(array_map(fn($r) => $r['forks_count'] ?? 0, $repos)),
                 'languages_count' => count($languages),
                 'top_language' => $topLanguage,
+                'languages_map' => $languages,
+                'languages_total' => array_sum($languages),
             ];
         })();
 
