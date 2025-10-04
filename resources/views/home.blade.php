@@ -49,6 +49,7 @@
                 </div>
             </div>
             <div class="tab-panel hidden border border-[#00ff7f33] rounded-sm p-4 bg-black/40" id="skills">
+                <div id="lang-bars" class="mt-4 space-y-2"></div>
             </div>
             <div class="tab-panel hidden border border-[#00ff7f33] rounded-sm p-4 bg-black/40" id="contact">
                 <h3 class="text-sm mb-2 opacity-90">Contact Info</h3>
