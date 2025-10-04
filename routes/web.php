@@ -10,3 +10,5 @@ Route::get('/', function () {
 Route::get('/github/stats', [GitHubController::class, 'stats']);
 
 Route::get('/github/repos', [GitHubController::class, 'repos']);
+
+Route::get('/github/pinned', [GitHubController::class, 'pinned']);
