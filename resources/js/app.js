@@ -79,17 +79,19 @@ async function fetchGitHubStats() {
         const mountLang = document.getElementById("lang-bars");
         if (mountLang && data.languages_map) {
             const entries = Object.entries(data.languages_map);
-            const total =
-                data.languages_total || entries.reduce((s, [, c]) => s + c, 0);
+            const total = data.languages_total || entries.reduce((s, [, c]) => s + c, 0);
             mountLang.innerHTML = entries
                 .map(([lang, count]) => {
                     const pct = total ? Math.round((count / total) * 100) : 0;
                     return `
-                        <div class="text-xs flex items-center justify-between">
-                            <span>${lang}</span><span>${count} · ${pct}%</span>
-                        </div>
-                        <div class="h-2 bg-black/40 border border-[#00ff7f33] rounded-sm">
-                            <div class="h-2 bg-[#00ff7f]" style="width:${pct}%"></div>
+                        <div class="border border-[#00ff7f33] rounded-sm p-3 bg-black/40">
+                            <div class="flex items-center justify-between text-xs">
+                                <span class="opacity-90">${lang}</span>
+                                <span class="opacity-80">${count} · ${pct}%</span>
+                            </div>
+                            <div class="mt-2 h-2 bg-black/40 border border-[#00ff7f33] rounded-sm">
+                                <div class="h-2 bg-[#00ff7f]" style="width:${pct}%"></div>
+                            </div>
                         </div>
                     `;
                 })
@@ -108,7 +110,7 @@ async function fetchRepos() {
                 .querySelector("[data-username]")
                 ?.getAttribute("data-username") || "RaxoTheOne";
         const res = await fetch(
-            `/github/repos?username=${encodeURIComponent(username)}&limit=24`
+            `/github/repos?username=${encodeURIComponent(username)}&limit=20`
         );
         if (!res.ok) return;
         const repos = await res.json();
@@ -118,17 +120,17 @@ async function fetchRepos() {
             .map(
                 (r) => `
                 <a href="${r.html_url}" target="_blank"
-                    class="block border border-[#00ff7f33] rounded-sm p-3 bg-black/40 hover:bg-[#072d1d] transition">
+                    class="block border border-[#00ff7f33] rounded-sm p-4 bg-black/40 hover:bg-[#072d1d] transition">
                     <div class="flex items-center justify-between">
-                        <h4 class="text-sm">${r.name}</h4>
-                        <span class="text-xs opacity-80">⭐ ${
+                        <h4 class="text-sm font-medium truncate">${r.name}</h4>
+                        <span class="text-[11px] opacity-80">⭐ ${
                             r.stargazers_count
                         }</span>
                     </div>
-                    <p class="text-xs opacity-80 mt-1">${
+                    <p class="text-xs opacity-80 mt-1 line-clamp-2">${
                         r.description ?? ""
                     }</p>
-                    <p class="text-[10px] opacity-60 mt-1">${
+                    <p class="text-[10px] opacity-60 mt-2">${
                         r.language ?? ""
                     }</p>
                 </a>
