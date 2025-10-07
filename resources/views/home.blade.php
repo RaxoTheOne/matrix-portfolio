@@ -3,19 +3,23 @@
 @section('content')
     <section class="py-10 lg:py-14">
         <div class="flex items-start gap-6" data-username="RaxoTheOne">
-            <img src="https://avatars.githubusercontent.com/u/11487003?v=4" alt="Avatar" class="w-16 h-16 rounded-full border border-[#00ff7f66]"/>
+            <img src="https://avatars.githubusercontent.com/u/11487003?v=4" alt="Avatar"
+                class="w-16 h-16 rounded-full border border-[#00ff7f66]" />
             <div>
                 <h1 class="text-3xl lg:text-4xl mb-1">
                     <span class="text-[#7ee7b5]">Benjamin Gayda-Knop</span>
                     <span class="opacity-70">— RaxoTheOne</span>
                 </h1>
-                <p class="text-[#7ee7b5] text-sm">31 Jahre alt, Vater von drei Mädchen, glücklich verheiratet, angehender Fachinformatiker für Anwendungsentwicklung</p>
+                <p class="text-[#7ee7b5] text-sm">31 Jahre alt, Vater von drei Mädchen, glücklich verheiratet, angehender
+                    Fachinformatiker für Anwendungsentwicklung</p>
                 <div class="mt-3 text-xs opacity-80 flex items-center gap-4">
                     <span>⭐ <span data-stat="total_stars">—</span> stars</span>
                     <span>🍴 <span data-stat="total_forks">—</span> forks</span>
                     <span>&lt;/&gt; <span data-stat="public_repos">—</span> Repos</span>
                 </div>
-                <a href="#projects" class="inline-block mt-4 px-4 py-1 bg-[#00ff7f] text-black rounded-sm border border-[#00ff7f] hover:bg-[#7ee7b5] transition">View My Work</a>
+                <a href="#projects"
+                    class="inline-block mt-4 px-4 py-1 bg-[#00ff7f] text-black rounded-sm border border-[#00ff7f] hover:bg-[#7ee7b5] transition">View
+                    My Work</a>
             </div>
         </div>
     </section>
@@ -43,13 +47,14 @@
                     <li>Most Used: <span data-stat="top_language">—</span></li>
                 </ul>
             </div>
-            <div class="tab-panel hidden border border-[#00ff7f33] rounded-sm p-4 bg-black/40" id="projects">
-                <div id="repo-list" class="grid grid-cols-1 lg:grid-cols-3 gap-3 mt-2">
-                <!-- wird per JS gefüllt -->
+            <div class="tab-panel hidden border border-[#00ff7f33] rounded-sm p-4 bg-black/40 lg:col-span-2" id="projects">
+                <div id="repo-list"
+                    class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 mt-2">
+                    <!-- wird per JS gefüllt -->
                 </div>
             </div>
             <div class="tab-panel hidden border border-[#00ff7f33] rounded-sm p-4 bg-black/40" id="skills">
-                <div id="lang-bars" class="mt-4 space-y-2"></div>
+                <div id="lang-bars" class="mt-4 grid grid-cols-2 lg:grid-cols-3 gap-3"></div>
             </div>
             <div class="tab-panel hidden border border-[#00ff7f33] rounded-sm p-4 bg-black/40" id="contact">
                 <h3 class="text-sm mb-2 opacity-90">Contact Info</h3>
