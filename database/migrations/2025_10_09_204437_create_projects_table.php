@@ -1,4 +1,3 @@
-// database/migrations/2024_xx_xx_create_projects_table.php
 <?php
 
 use Illuminate\Database\Migrations\Migration;
