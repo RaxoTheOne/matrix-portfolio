@@ -28,8 +28,5 @@
             @yield('content')
         </main>
 
-        <footer class="w-full max-w-6xl mx-auto p-6 text-xs text-[#7ee7b5]">
-            <p>© {{ date('Y') }} Matrix Portfolio · Built with Laravel</p>
-        </footer>
     </body>
     </html>
