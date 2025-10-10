@@ -16,6 +16,8 @@
                     <span>⭐ <span data-stat="total_stars">—</span> stars</span>
                     <span>🍴 <span data-stat="total_forks">—</span> forks</span>
                     <span>&lt;/&gt; <span data-stat="public_repos">—</span> Repos</span>
+                    <button id="refresh-stats"
+                        class="ml-3 px-2 py-0.5 border border-[#00ff7f66] rounded-sm hover:bg-[#00ff7f] hover:text-black transition">Refresh</button>
                 </div>
                 <a href="#projects"
                     class="inline-block mt-4 px-4 py-1 bg-[#00ff7f] text-black rounded-sm border border-[#00ff7f] hover:bg-[#7ee7b5] transition">View
@@ -48,6 +50,13 @@
                 </ul>
             </div>
             <div class="tab-panel hidden border border-[#00ff7f33] rounded-sm p-4 bg-black/40 lg:col-span-2" id="projects">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="text-sm opacity-90">GitHub Repositories</h3>
+                    <button id="refresh-repos"
+                        class="px-2 py-0.5 border border-[#00ff7f66] rounded-sm hover:bg-[#00ff7f] hover:text-black transition">
+                        Refresh
+                    </button>
+                </div>
                 <div id="repo-list"
                     class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 mt-2">
                     <!-- wird per JS gefüllt -->
