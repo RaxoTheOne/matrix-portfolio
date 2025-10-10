@@ -59,16 +59,18 @@ document.addEventListener("click", (e) => {
 });
 
 // Fetch GitHub stats and update placeholders
-async function fetchGitHubStats() {
+async function fetchGitHubStats(refresh = false) {
     try {
+        // Platzhalter setzen
+        document.querySelectorAll("[data-stat]")?.forEach((el) => (el.textContent = "…"));
+
         const username =
             document
                 .querySelector("[data-username]")
                 ?.getAttribute("data-username") || "RaxoTheOne";
-        const res = await fetch(
-            `/github/stats?username=${encodeURIComponent(username)}`
-        );
-        if (!res.ok) return;
+        const url = `/github/stats?username=${encodeURIComponent(username)}${refresh ? "&refresh=1" : ""}`;
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("Stats request failed");
         const data = await res.json();
         document.querySelectorAll("[data-stat]")?.forEach((el) => {
             const key = el.getAttribute("data-stat");
@@ -77,34 +79,48 @@ async function fetchGitHubStats() {
             }
         });
         const mountLang = document.getElementById("lang-bars");
-        if (mountLang && data.languages_map) {
-            const entries = Object.entries(data.languages_map);
-            const total = data.languages_total || entries.reduce((s, [, c]) => s + c, 0);
-            mountLang.innerHTML = entries
-                .map(([lang, count]) => {
-                    const pct = total ? Math.round((count / total) * 100) : 0;
-                    return `
-                        <div class="border border-[#00ff7f33] rounded-sm p-3 bg-black/40">
-                            <div class="flex items-center justify-between text-xs">
-                                <span class="opacity-90">${lang}</span>
-                                <span class="opacity-80">${count} · ${pct}%</span>
+        if (mountLang) {
+            if (data.languages_map) {
+                const entries = Object.entries(data.languages_map);
+                const total = data.languages_total || entries.reduce((s, [, c]) => s + c, 0);
+                mountLang.innerHTML = entries
+                    .map(([lang, count]) => {
+                        const pct = total ? Math.round((count / total) * 100) : 0;
+                        return `
+                            <div class="border border-[#00ff7f33] rounded-sm p-3 bg-black/40">
+                                <div class="flex items-center justify-between text-xs">
+                                    <span class="opacity-90">${lang}</span>
+                                    <span class="opacity-80">${count} · ${pct}%</span>
+                                </div>
+                                <div class="mt-2 h-2 bg-black/40 border border-[#00ff7f33] rounded-sm">
+                                    <div class="h-2 bg-[#00ff7f]" style="width:${pct}%"></div>
+                                </div>
                             </div>
-                            <div class="mt-2 h-2 bg-black/40 border border-[#00ff7f33] rounded-sm">
-                                <div class="h-2 bg-[#00ff7f]" style="width:${pct}%"></div>
-                            </div>
-                        </div>
-                    `;
-                })
-                .join("");
+                        `;
+                    })
+                    .join("");
+            } else {
+                mountLang.innerHTML = "";
+            }
         }
     } catch (e) {
-        // ignore silently
+        document.querySelectorAll("[data-stat]")?.forEach((el) => (el.textContent = "Fehler"));
+        console.error(e);
     }
 }
-window.addEventListener("load", fetchGitHubStats);
+window.addEventListener("load", () => fetchGitHubStats());
+document.addEventListener("click", (e) => {
+    if ((e.target)?.id === "refresh-stats") {
+        fetchGitHubStats(true);
+    }
+});
 
 async function fetchRepos() {
     try {
+        const mount = document.getElementById("repo-list");
+        if (mount) {
+            mount.innerHTML = `<div class="text-xs opacity-70">Lade Repos…</div>`;
+        }
         const username =
             document
                 .querySelector("[data-username]")
@@ -112,9 +128,8 @@ async function fetchRepos() {
         const res = await fetch(
             `/github/repos?username=${encodeURIComponent(username)}&limit=20`
         );
-        if (!res.ok) return;
+        if (!res.ok) throw new Error("Repos request failed");
         const repos = await res.json();
-        const mount = document.getElementById("repo-list");
         if (!mount) return;
         mount.innerHTML = repos
             .map(
@@ -123,20 +138,23 @@ async function fetchRepos() {
                     class="block border border-[#00ff7f33] rounded-sm p-4 bg-black/40 hover:bg-[#072d1d] transition">
                     <div class="flex items-center justify-between">
                         <h4 class="text-sm font-medium truncate">${r.name}</h4>
-                        <span class="text-[11px] opacity-80">⭐ ${
-                            r.stargazers_count
-                        }</span>
+                        <span class="text-[11px] opacity-80">⭐ ${r.stargazers_count}</span>
                     </div>
-                    <p class="text-xs opacity-80 mt-1 line-clamp-2">${
-                        r.description ?? ""
-                    }</p>
-                    <p class="text-[10px] opacity-60 mt-2">${
-                        r.language ?? ""
-                    }</p>
+                    <p class="text-xs opacity-80 mt-1 line-clamp-2">${r.description ?? ""}</p>
+                    <p class="text-[10px] opacity-60 mt-2">${r.language ?? ""}</p>
                 </a>
         `
             )
             .join("");
-    } catch (e) {}
+    } catch (e) {
+        const mount = document.getElementById("repo-list");
+        if (mount) mount.innerHTML = `<div class="text-xs opacity-70">Fehler beim Laden.</div>`;
+        console.error(e);
+    }
 }
 window.addEventListener("load", fetchRepos);
+document.addEventListener("click", (e) => {
+    if ((e.target)?.id === "refresh-repos") {
+        fetchRepos();
+    }
+});
