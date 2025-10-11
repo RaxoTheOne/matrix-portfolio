@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="py-8">
+    <section class="py-8 pt-12">
         <div class="flex items-center justify-between mb-4">
             <h1 class="text-xl">Skills</h1>
             <a href="{{ route('admin.skills.create') }}" class="px-3 py-1 border border-[#00ff7f66] rounded-sm">Neu</a>
