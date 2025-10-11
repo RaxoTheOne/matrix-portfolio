@@ -1,32 +1,49 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{{ $title ?? config('app.name', 'Matrix Portfolio') }}</title>
-        @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-            @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @endif
-    </head>
-    <body class="bg-black text-[#00ff7f] min-h-screen font-mono">
-        <canvas id="matrixRain" class="fixed inset-0 -z-10"></canvas>
-        <div class="fixed inset-0 -z-10 bg-black/75"></div>
 
-        <header class="w-full max-w-6xl mx-auto p-4 lg:p-6 flex items-center justify-between">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ $title ?? config('app.name', 'Matrix Portfolio') }}</title>
+    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @endif
+</head>
+
+<body class="bg-black text-[#00ff7f] min-h-screen font-mono">
+    <canvas id="matrixRain" class="fixed inset-0 -z-20"></canvas>
+    <div class="fixed inset-0 -z-10 bg-black/75"></div>
+
+    <header class="w-full max-w-6xl mx-auto p-4 lg:p-6 flex items-center justify-between">
+        @if(!request()->is('admin*'))
             <a href="/" class="text-sm font-medium tracking-wide">&lt;/&gt; RaxoTheOne</a>
             <nav class="hidden lg:flex items-center gap-6 text-sm">
                 <a href="#about" class="hover:underline underline-offset-4">About</a>
                 <a href="#projects" class="hover:underline underline-offset-4">Projects</a>
                 <a href="#skills" class="hover:underline underline-offset-4">Skills</a>
                 <a href="#contact" class="hover:underline underline-offset-4">Contact</a>
-                <a href="https://github.com/" target="_blank" class="px-3 py-1 border border-[#00ff7f66] rounded-sm hover:bg-[#00ff7f] hover:text-black transition">GitHub</a>
+                <a href="/admin" class="hover:underline underline-offset-4">Admin</a>
+                <a href="https://github.com/" target="_blank"
+                    class="px-3 py-1 border border-[#00ff7f66] rounded-sm hover:bg-[#00ff7f] hover:text-black transition">GitHub</a>
             </nav>
-        </header>
+        @endif
+    </header>
 
-        <main class="w-full max-w-6xl mx-auto px-4 lg:px-6">
-            {{ $slot ?? '' }}
-            @yield('content')
-        </main>
+    <main class="w-full max-w-6xl mx-auto px-4 lg:px-6">
+        {{ $slot ?? '' }}
+        @yield('content')
+    </main>
 
-    </body>
-    </html>
+    @if(request()->is('admin*'))
+        <nav class="fixed top-0 left-0 w-full bg-black/90 border-b border-[#00ff7f33] z-[9999]">
+            <div class="max-w-6xl mx-auto px-4 py-2 flex items-center gap-4 text-sm">
+                <a href="/admin" class="font-bold">Admin</a>
+                <a href="/admin/projects" class="hover:text-[#7ee7b5]">Projekte</a>
+                <a href="/admin/skills" class="hover:text-[#7ee7b5]">Skills</a>
+                <a href="/" class="ml-auto text-xs opacity-70">← Zurück zum Portfolio</a>
+            </div>
+        </nav>
+    @endif
+</body>
+
+</html>
