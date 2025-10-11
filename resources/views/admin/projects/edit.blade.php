@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="py-8 max-w-3xl">
+    <section class="py-8 max-w-3xl pt-12">
         <h1 class="text-xl mb-4">Projekt bearbeiten</h1>
         <form method="POST" action="{{ route('admin.projects.update', $project) }}" class="space-y-3">
             @csrf
